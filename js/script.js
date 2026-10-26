@@ -42,9 +42,9 @@ if (estimateForm) {
 
     const subject = encodeURIComponent(`Free estimate request from ${name}`);
     const body = encodeURIComponent(
-      `Hello Juan's Landscaping,\\n\\nI'd like to request a free estimate.\\n\\n` +
-      `Name: ${name}\\nPhone: ${phone}\\nEmail: ${email}\\nService: ${service}\\n\\n` +
-      `Project details:\\n${message}\\n\\nThank you!`
+      `Hello Juan's Landscaping,\n\nI'd like to request a free estimate.\n\n` +
+      `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\nService: ${service}\n\n` +
+      `Project details:\n${message}\n\nThank you!`
     );
 
     if (formStatus) {
