@@ -117,9 +117,19 @@ h1 em, h2 em { font-style: normal; color: var(--lime); }
 .contact-form .form-status { margin: 12px 0 0; font-size: 10px; line-height: 1.6; }
 .site-footer { background: var(--forest-deep); color: white; }
 .footer-main { display: flex; justify-content: space-between; align-items: center; gap: 25px; padding-top: 35px; padding-bottom: 35px; }
-.footer-brand { color: white; }
+/* Footer business name - white */
+.footer-brand,
+.footer-brand .brand-text,
+.footer-brand .brand-text strong {
+  color: #FFFFFF;
+}
 .footer-brand .brand-mark { background: var(--green); }
-.footer-main > p { color: #c4d1c5; font-size: 12px; }
+.footer-main > p {
+  color: #c4d1c5;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.6;
+}
 .footer-phone { color: var(--lime); font-size: 13px; font-weight: 800; }
 .footer-bottom { display: flex; justify-content: space-between; padding-top: 16px; padding-bottom: 16px; border-top: 1px solid rgba(255,255,255,.15); color: #b8c7ba; font-size: 10px; }
 .footer-bottom a { color: white; }
@@ -184,8 +194,40 @@ h1 em, h2 em { font-style: normal; color: var(--lime); }
 
 /* Homepage feature photograph, separate from the About page image */
 .home-story-image {
-  background-image: url("../images/test1.png");
+  background-image: url("../images/test1.png"), url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+/* ---------------------------------------------
+   Logo and responsive improvements (safe patch)
+   --------------------------------------------- */
+.brand-logo {
+  display: block;
+  width: 58px;
+  height: 58px;
+  flex: 0 0 58px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 5px;
+}
+.brand-text { min-width: 0; }
+.footer-brand .brand-text strong { color: #fff; }
+.trust-logo {
+  display: block;
+  grid-row: span 2;
+  align-self: center;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+@media (max-width: 800px) {
+  .site-header .brand { min-width: 0; max-width: calc(100% - 62px); }
+  .site-header .brand-text strong { font-size: clamp(14px, 2.7vw, 20px); line-height: 1.13; }
+}
+@media (max-width: 520px) {
+  .brand { gap: 8px; }
+  .brand-logo { width: 44px; height: 44px; flex-basis: 44px; }
+  .site-header .brand-text strong { font-size: clamp(12px, 3.5vw, 17px); line-height: 1.13; }
 }
