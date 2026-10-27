@@ -268,3 +268,7 @@ h1 em, h2 em { font-style: normal; color: var(--lime); }
     ),
     url("../images/backroundphotojob3.jpg");
 }
+/* About page lower photograph only */
+.about-page-section .about-image {
+  background-image: url("../images/job2.jpg");
+}
