@@ -23,34 +23,63 @@ if (menuToggle && mainNav) {
 const year = document.querySelector("#year");
 if (year) year.textContent = new Date().getFullYear();
 
-// The form prepares an email draft. It does not send data to a server.
+// Juan's Landscaping - Formspree estimate request form
 const estimateForm = document.querySelector("#estimate-form");
 const formStatus = document.querySelector("#form-status");
 
 if (estimateForm) {
-  estimateForm.addEventListener("submit", (event) => {
+  const submitButton = estimateForm.querySelector('button[type="submit"]');
+
+  estimateForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     if (!estimateForm.reportValidity()) return;
 
-    const formData = new FormData(estimateForm);
-    const name = formData.get("name");
-    const phone = formData.get("phone") || "Not provided";
-    const email = formData.get("email");
-    const service = formData.get("service") || "Not sure yet";
-    const message = formData.get("message");
-
-    const subject = encodeURIComponent(`Free estimate request from ${name}`);
-    const body = encodeURIComponent(
-      `Hello Juan's Landscaping,\n\nI'd like to request a free estimate.\n\n` +
-      `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\nService: ${service}\n\n` +
-      `Project details:\n${message}\n\nThank you!`
-    );
+    // Prevent duplicate submissions
+    submitButton.disabled = true;
 
     if (formStatus) {
-      formStatus.textContent = "Opening your email app with the request filled in. Please review it and press Send to contact Juan.";
+      formStatus.textContent = "Sending your estimate request...";
     }
 
-    window.location.href = `mailto:jandres788@gmail.com?subject=${subject}&body=${body}`;
+    try {
+      const formData = new FormData(estimateForm);
+
+      const response = await fetch(estimateForm.action, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json"
+        }
+      });
+
+      if (response.ok) {
+        if (formStatus) {
+          formStatus.textContent =
+            "Thank you! Your estimate request has been sent successfully. Juan will follow up with you.";
+        }
+
+        // Clear the fields after successful submission
+        estimateForm.reset();
+
+      } else {
+        if (formStatus) {
+          formStatus.textContent =
+            "Sorry, we couldn't send your request. Please try again or contact Juan directly.";
+        }
+      }
+
+    } catch (error) {
+      console.error("Form submission error:", error);
+
+      if (formStatus) {
+        formStatus.textContent =
+          "A connection error occurred. Please try again or contact Juan directly.";
+      }
+
+    } finally {
+      // Allow another attempt after submission
+      submitButton.disabled = false;
+    }
   });
 }
