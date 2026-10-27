@@ -272,3 +272,45 @@ h1 em, h2 em { font-style: normal; color: var(--lime); }
 .about-page-section .about-image {
   background-image: url("../images/job2.jpg");
 }
+/* About page - small heading above "Small details" */
+.about-page-section .about-content > .eyebrow {
+  color: #4F824D;
+}
+/* Contact page background photo */
+.contact-hero {
+  background-image:
+    linear-gradient(
+      110deg,
+      rgba(13, 42, 25, 0.45),
+      rgba(28, 79, 46, 0.25)
+    ),
+    url("../images/backroundphotojob4.jpg");
+}
+/* Footer phone and email layout */
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+}
+
+.footer-email {
+  color: #c4d1c5;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.footer-contact a:hover {
+  text-decoration: underline;
+}
+
+/* Mobile footer adjustment */
+@media (max-width: 800px) {
+  .footer-contact {
+    align-items: flex-start;
+  }
+}
+/* Keep footer contact links on one line */
+.footer-contact a {
+  white-space: nowrap;
+}
