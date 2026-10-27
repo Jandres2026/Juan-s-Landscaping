@@ -83,3 +83,47 @@ if (estimateForm) {
     }
   });
 }
+
+// ==========================================
+// PROJECTS PAGE - FULL SCREEN PHOTO VIEWER
+// ==========================================
+
+const photoLightbox = document.getElementById("photo-lightbox");
+
+if (photoLightbox) {
+  const lightboxImage = document.getElementById("photo-lightbox-image");
+  const lightboxCaption = document.getElementById("photo-lightbox-caption");
+  const closeButton = photoLightbox.querySelector(".photo-lightbox-close");
+
+  // Open the photo viewer when a project is clicked
+  document.querySelectorAll(".photo-card").forEach((card) => {
+    card.addEventListener("click", () => {
+      const image = card.querySelector("img");
+      const caption = card.querySelector(".photo-caption");
+
+      if (!image || !lightboxImage || !lightboxCaption) return;
+
+      lightboxImage.src = image.currentSrc || image.src;
+      lightboxImage.alt = image.alt;
+      lightboxCaption.textContent = caption
+        ? caption.textContent.trim()
+        : "";
+
+      photoLightbox.showModal();
+    });
+  });
+
+  // Close using the X button
+  if (closeButton) {
+    closeButton.addEventListener("click", () => {
+      photoLightbox.close();
+    });
+  }
+
+  // Close when clicking outside the image
+  photoLightbox.addEventListener("click", (event) => {
+    if (event.target === photoLightbox) {
+      photoLightbox.close();
+    }
+  });
+}
