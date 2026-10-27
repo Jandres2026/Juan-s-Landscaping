@@ -314,3 +314,238 @@ h1 em, h2 em { font-style: normal; color: var(--lime); }
 .footer-contact a {
   white-space: nowrap;
 }
+
+/* ==========================================
+   PROJECTS PAGE - PHOTO GALLERY
+   ========================================== */
+
+.photos-section {
+  background: var(--cream);
+}
+
+/* Section heading */
+.photos-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.photos-heading h2 {
+  margin: 0;
+  font-size: clamp(36px, 4.3vw, 52px);
+}
+
+.photos-heading h2 em {
+  color: var(--green);
+}
+
+.photos-heading > p {
+  max-width: 360px;
+  margin: 0 0 5px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+/* Gallery grid */
+.photos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+/* Individual project card */
+.photo-card {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--white);
+  text-align: left;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 8px 28px rgba(17, 44, 28, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.photo-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+
+/* Photo container */
+.photo-frame {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #e8eee6;
+}
+
+/* Photo sizing and centering */
+.photo-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.3s ease;
+}
+
+.photo-card:hover img {
+  transform: scale(1.04);
+}
+
+/* Photo captions */
+.photo-caption {
+  display: block;
+  padding: 17px 19px;
+  color: var(--forest);
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* ==========================================
+   EXPANDED PHOTO VIEWER
+   ========================================== */
+
+.photo-lightbox {
+  position: fixed;
+  max-width: min(1000px, 92vw);
+  max-height: 90vh;
+  padding: 18px;
+  border: none;
+  border-radius: 6px;
+  background: var(--white);
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.3);
+}
+
+.photo-lightbox::backdrop {
+  background: rgba(5, 20, 10, 0.85);
+}
+
+.photo-lightbox img {
+  display: block;
+  max-width: 100%;
+  max-height: 75vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  margin: auto;
+}
+
+.photo-lightbox p {
+  margin: 12px 0 0;
+  color: var(--forest);
+  text-align: center;
+  font-weight: 700;
+}
+
+.photo-lightbox-close {
+  display: block;
+  margin: 0 0 10px auto;
+  border: none;
+  background: none;
+  color: var(--forest);
+  font-size: 30px;
+  cursor: pointer;
+}
+
+/* ==========================================
+   TABLET RESPONSIVENESS
+   ========================================== */
+
+@media (max-width: 900px) {
+  .photos-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .photos-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+}
+
+/* ==========================================
+   MOBILE RESPONSIVENESS
+   ========================================== */
+
+@media (max-width: 560px) {
+  .photos-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .photos-heading h2 {
+    font-size: 36px;
+  }
+
+  .photo-caption {
+    padding: 15px 16px;
+  }
+}
+
+/* ==========================================
+   FULL SCREEN PROJECT PHOTO VIEWER
+   ========================================== */
+
+.photo-lightbox {
+  width: 100vw;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 60px 22px 24px;
+  border: none;
+  border-radius: 0;
+  background: #102d20;
+  color: white;
+}
+
+/* Center the expanded photograph */
+.photo-lightbox[open] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* Display the entire photo without cropping */
+.photo-lightbox img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(100dvh - 145px);
+  object-fit: contain;
+}
+
+/* Photo caption */
+.photo-lightbox p {
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  margin: 0;
+}
+
+/* Close button */
+.photo-lightbox-close {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  margin: 0;
+  padding: 5px 10px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 36px;
+  cursor: pointer;
+  z-index: 2;
+}
